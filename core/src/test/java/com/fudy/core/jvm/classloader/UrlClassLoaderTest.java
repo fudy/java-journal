@@ -19,4 +19,22 @@ public class UrlClassLoaderTest {
         fudyClass.getMethod("say").invoke(fudy);
 
     }
+
+    @Test
+    public void test2()  throws Exception {
+        URL url = new File("../api/target/classes/").toURI().toURL();
+        URLClassLoader loader = new URLClassLoader(new URL[]{url});
+        Class<?> fudyClass = loader.loadClass("com.fudy.api.Fudy");
+        Object fudy = fudyClass.newInstance();
+        fudyClass.getMethod("say").invoke(fudy);
+    }
+
+    @Test
+    public void test3()  throws Exception {
+        URL url = new File("/tmp/").toURI().toURL();
+        URLClassLoader loader = new URLClassLoader(new URL[]{url});
+        Class<?> fudyClass = loader.loadClass("HelloWorld");
+        Object fudy = fudyClass.newInstance();
+        fudyClass.getMethod("execute").invoke(fudy);
+    }
 }
